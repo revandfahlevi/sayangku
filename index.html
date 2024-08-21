@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time & Memories</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            overflow-x: hidden;
+        }
+        .header {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-image: url('://example.com/time-bg.jpg'); /* httpsGanti dengan URL gambar */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            color: white;
+        }
+        .header h1 {
+            font-size: 4em;
+            margin: 0;
+            opacity: 0;
+            animation: slideIn 2s ease-in-out forwards;
+        }
+        .header p {
+            font-size: 1.5em;
+            margin-top: 20px;
+            opacity: 0;
+            animation: slideIn 2s ease-in-out 1s forwards;
+        }
+        .clock-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.8);
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .hand {
+            position: absolute;
+            width: 50%;
+            height: 6px;
+            background-color: white;
+            top: 50%;
+            left: 50%;
+            transform-origin: 100%;
+            transform: rotate(0deg);
+            transition: transform 0.5s cubic-bezier(0.4, 2.3, 0.3, 1);
+        }
+        .hour-hand {
+            height: 8px;
+            background-color: #e74c3c;
+        }
+        .minute-hand {
+            background-color: #3498db;
+        }
+        .second-hand {
+            height: 4px;
+            background-color: #2ecc71;
+        }
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 20px;
+        }
+        .section {
+            background-color: rgba(44, 62, 80, 0.9);
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transform: scale(0.9);
+            opacity: 0;
+            animation: appear 1s ease-in-out forwards;
+        }
+        .section h2 {
+            font-size: 2.5em;
+            color: #f39c12;
+            margin-bottom: 20px;
+        }
+        .section p {
+            font-size: 1.2em;
+            color: #bdc3c7;
+        }
+        .section:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(0, 0, 0, 0.2);
+            transform: rotate(30deg);
+            z-index: -1;
+        }
+        @keyframes appear {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .parallax {
+            background-image: url('https://example.com/parallax-bg.jpg'); /* Ganti dengan URL gambar */
+            height: 300px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 50px 0;
+            filter: brightness(70%);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="clock-container">
+            <div class="hand hour-hand" id="hour-hand"></div>
+            <div class="hand minute-hand" id="minute-hand"></div>
+            <div class="hand second-hand" id="second-hand"></div>
+        </div>
+        <h1>Our Timeless Love</h1>
+        <p>Moments become memories, memories become eternity.</p>
+    </div>
+
+    <div class="content">
+        <div class="section">
+            <h2>The Beginning</h2>
+            <p>When we first met, time seemed to slow down, capturing our first moments together...</p>
+        </div>
+        <div class="parallax"></div>
+        <div class="section">
+            <h2>Growing Together</h2>
+            <p>With every second that passed, our love grew stronger, filling the gaps between the ticking clock...</p>
+        </div>
+        <div class="parallax"></div>
+        <div class="section">
+            <h2>Eternal Bond</h2>
+            <p>Now and forever, our love will transcend time, forever etched in the memories we share...</p>
+        </div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const seconds = now.getSeconds();
+            const minutes = now.getMinutes();
+            const hours = now.getHours() % 12;
+
+            const secondDegree = seconds * 6;
+            const minuteDegree = minutes * 6;
+            const hourDegree = (hours * 30) + (minutes / 2);
+
+            document.getElementById('second-hand').style.transform = `rotate(${secondDegree}deg)`;
+            document.getElementById('minute-hand').style.transform = `rotate(${minuteDegree}deg)`;
+            document.getElementById('hour-hand').style.transform = `rotate(${hourDegree}deg)`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
